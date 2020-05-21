@@ -24,9 +24,9 @@ var db = require('knex')({
   client: 'pg',
   connection: {
     host : '127.0.0.1',
-    user : '',
-    password : '',
-    database : 'crud-starter-api'
+    user : 'postgres',
+    password : 'password',
+    database : 'hktvapi'
   }
 });
 
@@ -53,9 +53,10 @@ app.use(bodyParser.json())
 app.use(morgan('combined')) // use 'tiny' or 'combined'
 
 // App Routes - Auth
-app.get('/', (req, res) => res.send('hello world'))
+app.get('/', (req, res) => res.send('hello world -- to hktvapi'))
 app.get('/crud', (req, res) => main.getTableData(req, res, db))
 app.post('/crud', (req, res) => main.postTableData(req, res, db))
+app.post('/bulk', (req, res) => main.postBulkData(req, res, db))
 app.put('/crud', (req, res) => main.putTableData(req, res, db))
 app.delete('/crud', (req, res) => main.deleteTableData(req, res, db))
 

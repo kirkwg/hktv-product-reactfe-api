@@ -1,7 +1,7 @@
 {
-  "name": "crudpractice1",
+  "name": "hktv-product-api",
   "version": "1.0.0",
-  "description": "crud practice",
+  "description": "hktv product api",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"

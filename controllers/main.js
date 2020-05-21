@@ -1,5 +1,5 @@
 const getTableData = (req, res, db) => {
-  db.select('*').from('testtable1')
+  db.select('*').from('products')
     .then(items => {
       if(items.length){
         res.json(items)
@@ -11,9 +11,9 @@ const getTableData = (req, res, db) => {
 }
 
 const postTableData = (req, res, db) => {
-  const { first, last, email, phone, location, hobby } = req.body
+  const {   name, code, weight, quantity, location } = req.body
   const added = new Date()
-  db('testtable1').insert({first, last, email, phone, location, hobby, added})
+  db('products').insert({name, code, weight, quantity, location})
     .returning('*')
     .then(item => {
       res.json(item)
@@ -21,9 +21,27 @@ const postTableData = (req, res, db) => {
     .catch(err => res.status(400).json({dbError: 'db error'}))
 }
 
+const postBulkData = (req, res, db) => {
+  const {   name, code, weight, quantity, location } = req.body
+  console.log("**req.body= " + req.body)
+  //const added = new Date()
+  
+  const bulk = [
+		{name: 'test01', code: 'code-001', weight: 30, quantity: 30, location: 'SSP' }, 
+		{name: 'test02', code: 'code-002', weight: 40, quantity: 40, location: 'LK' }, 
+		{name: 'test03', code: 'code-003', weight: 50, quantity: 50, location: 'TWW' } 
+  ]
+  db('products').insert(bulk)
+    .returning('*')
+    .then(item => {
+      console.log(res.json(item))
+    })
+    .catch(err => res.status(400).json({dbError: 'db error'}))
+}
+
 const putTableData = (req, res, db) => {
-  const { id, first, last, email, phone, location, hobby } = req.body
-  db('testtable1').where({id}).update({first, last, email, phone, location, hobby})
+  const { id, name, code, weight, quantity, location } = req.body
+  db('products').where({id}).update({name, code, weight, quantity, location})
     .returning('*')
     .then(item => {
       res.json(item)
@@ -33,7 +51,7 @@ const putTableData = (req, res, db) => {
 
 const deleteTableData = (req, res, db) => {
   const { id } = req.body
-  db('testtable1').where({id}).del()
+  db('products').where({id}).del()
     .then(() => {
       res.json({delete: 'true'})
     })
@@ -43,6 +61,7 @@ const deleteTableData = (req, res, db) => {
 module.exports = {
   getTableData,
   postTableData,
+  postBulkData,
   putTableData,
   deleteTableData
 }
