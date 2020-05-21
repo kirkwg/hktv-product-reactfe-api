@@ -92,7 +92,7 @@ Please refer and view the [repository for the frontend part](https://github.com/
 3. Browser URL for client/frontend will be http://localhost:3001/
 4. To test server side API, i.e. use postman as a testing tool and use following APIs:
    1. GET call for obtaining all the records, url should be : `http://localhost:3000/crud`
-   2. GET call for single record by id, for eg : `http://localhost:3000/customers/1`
+   2. GET call for single record by id, for eg : `http://localhost:3000/crud/1`
    3. POST call for bulk create records : `http://localhost:3000/bulk` This call needs a body to be passed (used for importing a csv into the DB)
    4. POST call for single create records `http://localhost:3000/crud` This call needs a body to be passed
    5. DELETE call for record deletion by id, e.g. `http://localhost:3000/crud/2`
